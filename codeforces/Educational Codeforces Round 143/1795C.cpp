@@ -14,71 +14,44 @@
 
 using namespace std;
 typedef long long ll;
-const ll MOD=998244353;
+const ll MOD=1e9+7;
 const ll MAXN=2e5+5;
 const ll INF=0x7f7f7f7f;
 
-inline ll add(ll a,ll b){
-    return (a+b)%MOD;
-}
-inline ll mul(ll a,ll b){
-    return (a%MOD*(b%MOD))%MOD;
-}
-inline ll sub(ll a,ll b){
-    return (a%MOD-b%MOD+MOD)%MOD;
-}
-ll mpow(ll a,ll b){
-    ll am=a%MOD;
-    ll result=1;
-    while(b){
-        if (b&1) result=result*am%MOD;
-        am=am*am%MOD;
-        b>>=1;
-    }
-    return result;
-}
-ll dv(ll a,ll b){
-    return mul(a,mpow(b,MOD-2));
-}
-ll permute[MAXN],inv[MAXN];
-void comb_init(){
-    permute[0]=1;inv[0]=1;
-    for (int i=1; i<MAXN; ++i){
-        permute[i]=mul(permute[i-1],i);
-        inv[i]=mpow(permute[i],MOD-2);
-    }
-}
-inline ll perm(ll a,ll b){
-    if(a<b) swap(a,b);
-    return mul(permute[a],inv[a-b]);
-}
-inline ll comb(ll a,ll b){
-    if(a<b) swap(a,b);
-    return mul(mul(permute[a],inv[b]),inv[a-b]);
-}
-
 void solve(){
     int n;cin >> n;
-    comb_init();
-    ll ans=comb(n/3,n/6);
-    fori(1,n/3+1){
-        vector<int> v(3);
-        forj(0,3)cin >> v[j];
-
-        sort(v.begin(),v.end());
-        if(v[0]==v[1] && v[1]==v[2])
-            ans=mul(ans,3);
-        else if(v[0]==v[1])
-            ans=mul(ans,2);
+    vector<ll> a(n+1),b(n+1),s(n+1);
+    fori(1,n+1)cin >> a[i];
+    fori(1,n+1)cin >> b[i];
+    fori(1,n+1)s[i]=s[i-1]+b[i];
+    vector<ll> m(n+1),p(n+1);
+    fori(1,n+1){
+        int pos = lower_bound(s.begin()+i,s.end(),a[i]+s[i-1])-s.begin();
+        if(pos>i){
+            m[i]++;
+        }else{
+            p[i]+=a[i];continue;
+        }
+        if(pos<=n){
+            m[pos]--;
+            p[pos]+=s[i-1];
+            p[pos]-=s[pos-1];
+            p[pos]+=a[i];
+        }
     }
-    cout << ans << endl;
+    ll mp=0;
+    fori(1,n+1){
+        mp+=m[i];
+        cout << mp*b[i]+p[i] << ' ';
+    }
+    cout << endl;
 }
 
 int main(){
     cin.tie(0);
     ios::sync_with_stdio(false);
-//    int t;cin >> t;
-//    while(t--)
+    int t;cin >> t;
+    while(t--)
         solve();
     return 0;
 }
