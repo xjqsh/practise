@@ -13,20 +13,23 @@ const ll MAXN=4e6+5;
 const ll INF=0x7f7f7f7f;
 
 void solve(){
-
+    int n;cin >> n;
+    int ans=n-1;
+    string str;cin >> str;
+    fori(0,n-2){
+        if(str[i]==str[i+2])ans--;
+    }
+    cout << ans << endl;
 }
 
 int main(){
-    cin.tie(0);
-    ios::sync_with_stdio(false);
-
+//    cin.tie(0);
+//    ios::sync_with_stdio(false);
     int t;cin >> t;
     while(t--)
         solve();
     return 0;
 }
-
-
 
 
 

@@ -9,24 +9,22 @@
 using namespace std;
 typedef long long ll;
 const ll MOD=2e9+7;
-const ll MAXN=4e6+5;
+const ll MAXN=5e6+5;
 const ll INF=0x7f7f7f7f;
+
 
 void solve(){
 
 }
 
 int main(){
-    cin.tie(0);
-    ios::sync_with_stdio(false);
-
+//    cin.tie(0);
+//    ios::sync_with_stdio(false);
     int t;cin >> t;
     while(t--)
         solve();
     return 0;
 }
-
-
 
 
 

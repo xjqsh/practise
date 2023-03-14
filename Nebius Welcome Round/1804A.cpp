@@ -12,8 +12,10 @@ const ll MOD=2e9+7;
 const ll MAXN=4e6+5;
 const ll INF=0x7f7f7f7f;
 
-void solve(){
 
+void solve(){
+    int a=3,b=2,c=1;
+    cout << (a>=b!=c) << endl;
 }
 
 int main(){
@@ -21,8 +23,8 @@ int main(){
     ios::sync_with_stdio(false);
 
     int t;cin >> t;
-    while(t--)
-        solve();
+    while (t--)solve();
+
     return 0;
 }
 
